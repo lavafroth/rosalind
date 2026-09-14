@@ -1,3 +1,3 @@
 [workspace]
 resolver = "3"
-members = ["consensus","count_nucleotides", "finding_a_protein_motif", "intro_to_random_strings", "lia", "mortal_rabbits", "overlap_graphs", "rabbits", "rev_complement", "subs"]
+members = ["consensus","count_nucleotides", "finding_a_protein_motif", "gc_content", "intro_to_random_strings", "lia", "mortal_rabbits", "overlap_graphs", "rabbits", "rev_complement", "subs"]
