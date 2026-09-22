@@ -2,10 +2,9 @@ package main
 
 import (
 	"fmt"
+	"github.com/lavafroth/rosalind/revcomp"
 	"log"
 	"os"
-	"slices"
-	"strings"
 )
 
 func main() {
@@ -14,21 +13,10 @@ func main() {
 		log.Fatalf("failed to open input file: %v", err)
 	}
 
-	slices.Reverse(content)
-
-	var s strings.Builder
-	for _, c := range content {
-		switch c {
-		case 'A':
-			s.WriteByte('T')
-		case 'T':
-			s.WriteByte('A')
-		case 'C':
-			s.WriteByte('G')
-		case 'G':
-			s.WriteByte('C')
-		}
+	r, err := revcomp.ReverseComplement(content)
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	fmt.Println(s.String())
+	fmt.Println(string(r))
 }
