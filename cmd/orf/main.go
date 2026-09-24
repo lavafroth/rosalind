@@ -3,8 +3,8 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"github.com/lavafroth/rosalind/codon"
 	"github.com/lavafroth/rosalind/revcomp"
-	"iter"
 	"log"
 	"os"
 	"strings"
@@ -74,21 +74,11 @@ var codonProtein = map[string]byte{
 	"GGG": 'G',
 }
 
-func Codons(b []byte) iter.Seq[[]byte] {
-	return func(yield func([]byte) bool) {
-		for i := range len(b) / 3 {
-			if !yield(b[3*i : 3*i+3]) {
-				return
-			}
-		}
-	}
-}
-
 func transcribe(content []byte, set map[string]struct{}) {
 	var protein strings.Builder
 	started := false
 
-	for c := range Codons(content) {
+	for c := range codon.Chunks(content) {
 		codon := string(c)
 		if !started && codon != "ATG" {
 			continue

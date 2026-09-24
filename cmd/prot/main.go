@@ -2,21 +2,12 @@ package main
 
 import (
 	"fmt"
-	"iter"
+	"github.com/lavafroth/rosalind/codon"
 	"log"
 	"os"
 	"strings"
 )
 
-func Codons(b []byte) iter.Seq[[]byte] {
-	return func(yield func([]byte) bool) {
-		for i := range len(b) / 3 {
-			if !yield(b[3*i : 3*i+3]) {
-				return
-			}
-		}
-	}
-}
 func main() {
 	content, err := os.ReadFile("./input.txt")
 	if err != nil {
@@ -89,7 +80,7 @@ func main() {
 
 	var protein strings.Builder
 
-	for c := range Codons(content) {
+	for c := range codon.Chunks(content) {
 		codon := string(c)
 		if codon == "UAA" || codon == "UAG" || codon == "UGA" {
 			break
